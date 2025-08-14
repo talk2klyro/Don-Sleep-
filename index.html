@@ -37,10 +37,13 @@
         background: white;
         border-radius: 12px;
         box-shadow: 0 6px 20px rgba(0,0,0,0.05);
-        transition: transform 0.2s ease;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
     }
-    section:hover {
-        transform: translateY(-3px);
+    section.show {
+        opacity: 1;
+        transform: translateY(0);
     }
     h2 {
         color: #0f766e;
@@ -163,5 +166,22 @@
     &copy; 2025 Don Sleep | Community Health Extension Worker
 </footer>
 
+<script>
+    const sections = document.querySelectorAll("section");
+
+    const revealOnScroll = () => {
+        const triggerBottom = window.innerHeight * 0.85;
+        sections.forEach(section => {
+            const sectionTop = section.getBoundingClientRect().top;
+            if (sectionTop < triggerBottom) {
+                section.classList.add("show");
+            }
+        });
+    };
+
+    window.addEventListener("scroll", revealOnScroll);
+    window.addEventListener("load", revealOnScroll);
+</script>
+
 </body>
-</html>
+    </html>
